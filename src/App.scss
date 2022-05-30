@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+
+  .create-issue-button {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+  }
+
+  .issues-heading {
+      text-align: left;
+  }
+
+  .issues-actions {
+      display: flex;
+      justify-content: center;
+
+    .select-labels {
+        width: 200px !important;
+    }
+  }
+
+  .search-input {
+      outline-offset: 0;
+      width: 200px;
+      height: 38px;
+  }
+
+  .issues-labels {
+    padding: 15px 15px !important;
+  }
+
+  .label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+  }
+}
+
+.err-msg {
+  height: 10px !important;
+  font-size: 14px;
+}
+
+.no-issue {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+
