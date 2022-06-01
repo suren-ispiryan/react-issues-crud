@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
-
-const initialValues = {
-    title: '',
-    description: '',
-}
 
 const IssueModal = (props) => {
     const {
