@@ -19,7 +19,6 @@ const IssuesList = (props) => {
     const [startPoint, setStartPoint] = useState(0);
     const [endPoint, setEndPoint] = useState(2);
 
-
     useEffect(() => {
         if (!searchedIssues.length) {
             if (prevPage < currentPage) {
@@ -29,12 +28,12 @@ const IssuesList = (props) => {
             }
         } else {
             if (prevPage < currentPage) {
-                setIssuesCopy(searchedIssues.slice(endPoint-rowsPerPage, endPoint));
+                setIssuesCopy(issues.slice(endPoint-rowsPerPage, endPoint));
             } else {
-                setIssuesCopy(searchedIssues.slice(endPoint-rowsPerPage, endPoint));
+                setIssuesCopy(issues.slice(endPoint-rowsPerPage, endPoint));
             }
         }
-    },[startPoint, endPoint, issues, searchedIssues, prevPage, currentPage]);
+    },[startPoint, endPoint, issues, prevPage, currentPage]);
 
     const renderIssueLabels = (issueLabels) => {
         return issueLabels.map( (label, i) =>(

@@ -81,12 +81,16 @@ const App = () => {
     const handleShowIssue = () => setShowIssue(true);
 
     const handleSearch = ({ value }) => {
-        setSearched(issues.filter(i => new RegExp(value, 'i').test(i.description)))
         // setSearched(issues.filter(i => i.description.includes(value)))
+        if (value !== '') {
+            setSearched(issues.filter(i => new RegExp(value, 'i').test(i.description)))
+        } else {
+            setSearched(issues.slice(0, 2))
+        }
     }
 
     const searchIssue = () => {
-        setSearchedIssues(searched)
+        setIssuesCopy(searched)
     }
 
   return (
@@ -115,11 +119,11 @@ const App = () => {
             </div>
         </div>
         <IssuesList
-            searchedIssues={searchedIssues}
             setSearchedIssues={setSearchedIssues}
             issuesCopy={issuesCopy}
             setIssuesCopy={setIssuesCopy}
             setIssues={setIssues}
+            searchedIssues={searchedIssues}
             labels={labels}
             issues={issues}
         />
