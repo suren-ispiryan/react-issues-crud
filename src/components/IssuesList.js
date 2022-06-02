@@ -4,20 +4,22 @@ import ReactPaginate from 'react-paginate';
 import {useEffect, useState} from "react";
 const rowsPerPage = 2; // change to 10
 
-const IssuesList = (props) => {
-    const {
-        issues,
-        setIssuesCopy,
-        setIssues,
-        labels,
-        searchedIssues,
-        issuesCopy,
-    } = props;
+const IssuesList = ({
+    issues,
+    setIssuesCopy,
+    setIssues,
+    labels,
+    searchedIssues,
+    issuesCopy,
+}) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [prevPage, setPrevPage] = useState(0);
     const [startPoint, setStartPoint] = useState(0);
     const [endPoint, setEndPoint] = useState(2);
+    const [count, setCount] = useState(0);
+
+
 
     useEffect(() => {
         if (!searchedIssues.length) {
@@ -26,14 +28,16 @@ const IssuesList = (props) => {
             } else {
                 setIssuesCopy(issues.slice(endPoint - rowsPerPage, endPoint));
             }
+            setCount(issues.length);
         } else {
             if (prevPage < currentPage) {
-                setIssuesCopy(issues.slice(endPoint-rowsPerPage, endPoint));
+                setIssuesCopy(searchedIssues.slice(endPoint-rowsPerPage, endPoint));
             } else {
-                setIssuesCopy(issues.slice(endPoint-rowsPerPage, endPoint));
+                setIssuesCopy(searchedIssues.slice(endPoint-rowsPerPage, endPoint));
             }
+            setCount(searchedIssues.length);
         }
-    },[startPoint, endPoint, issues, prevPage, currentPage]);
+    },[startPoint, endPoint, issues, count, searchedIssues, prevPage, currentPage]);
 
     const renderIssueLabels = (issueLabels) => {
         return issueLabels.map( (label, i) =>(
@@ -64,10 +68,10 @@ const IssuesList = (props) => {
         const selectedPage = page.selected + 1;
         onPageChange(rowsPerPage, selectedPage);
         setCurrentPage(selectedPage);
-    };
+    }
 
     const CustomPagination = () => {
-        let pageCount = Math.ceil(issues.length / rowsPerPage);
+        let pageCount = Math.ceil(count / rowsPerPage);
         return (
             <ReactPaginate
                 previousLabel=""
@@ -134,6 +138,8 @@ const IssuesList = (props) => {
         </div>
     );
 }
+
+
 
 IssuesList.propTypes = {
     labels: PropTypes.array,

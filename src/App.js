@@ -85,12 +85,12 @@ const App = () => {
         if (value !== '') {
             setSearched(issues.filter(i => new RegExp(value, 'i').test(i.description)))
         } else {
-            setSearched(issues.slice(0, 2))
+            setSearched(issues)
         }
     }
 
     const searchIssue = () => {
-        setIssuesCopy(searched)
+        setSearchedIssues(searched)
     }
 
   return (
@@ -108,7 +108,9 @@ const App = () => {
                         placeholder="Search"
                         onChange={(event) => handleSearch(event.target)}
                     />
-                    <button className="btn btn-primary" onClick={searchIssue}>Search</button>
+                    <button className="btn btn-primary" onClick={searchIssue}>
+                        Search
+                    </button>
                     <button className="btn btn-primary mx-2" onClick={handleShow}>
                         Create label
                     </button>
@@ -153,3 +155,5 @@ const App = () => {
 }
 
 export default App;
+
+
