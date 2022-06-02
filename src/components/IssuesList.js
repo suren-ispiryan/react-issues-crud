@@ -142,7 +142,16 @@ const IssuesList = ({
                         </tbody>
                     </Table>
                 }
-            <CustomPagination />
+
+                {
+                    (!searchedIssues.length && !issuesCopy.length)
+                    ?
+                    <>
+
+                    </>
+                    :
+                    <CustomPagination/>
+                }
 
             {/* confirm delete */}
             <Modal show={ showDelete } onHide={ handleCloseDelete }>
