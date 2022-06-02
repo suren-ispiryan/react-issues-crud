@@ -1,8 +1,8 @@
-import { Table } from 'react-bootstrap';
+import { Table, Modal, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import {useEffect, useState} from "react";
-const rowsPerPage = 2; // change to 10
+const rowsPerPage = 2;
 
 const IssuesList = ({
     issues,
@@ -18,8 +18,15 @@ const IssuesList = ({
     const [startPoint, setStartPoint] = useState(0);
     const [endPoint, setEndPoint] = useState(2);
     const [count, setCount] = useState(0);
+    const [showDelete, setShowDelete] = useState(false);
+    const [deletedUserSetId, setDeletedUserSetId] = useState();
 
+    const handleCloseDelete = () => setShowDelete(false);
 
+    const handleShowDelete = (deleteUserId) => {
+        setShowDelete(true);
+        setDeletedUserSetId(deleteUserId);
+    };
 
     useEffect(() => {
         if (!searchedIssues.length) {
@@ -50,14 +57,15 @@ const IssuesList = ({
         )
     }
 
-    const deleteIssue = (elementId) => {
-        const removedIssue = issues.findIndex(i => i.id === elementId)
+    const deleteIssue = () => {
+        const removedIssue = issues.findIndex(i => i.id === deletedUserSetId)
         const issuesCopy = [...issues]
         issuesCopy.splice(removedIssue, 1)
         setIssues(issuesCopy)
+        setShowDelete(false);
     }
 
-    // pagination per page
+    // pagination
     const onPageChange = (rowsPerPage, selectedPage) => {
         setEndPoint((rowsPerPage * selectedPage));
         setStartPoint(endPoint);
@@ -122,7 +130,7 @@ const IssuesList = ({
                                         <td className="issues-actions">
                                             <button
                                                 className="btn btn-danger mx-2"
-                                                onClick={() => deleteIssue(item.id)}
+                                                onClick={ () => handleShowDelete(item.id) }
                                             >
                                                 Delete
                                             </button>
@@ -135,11 +143,25 @@ const IssuesList = ({
                     </Table>
                 }
             <CustomPagination />
+
+            {/* confirm delete */}
+            <Modal show={ showDelete } onHide={ handleCloseDelete }>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want  to delete this issue?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={ handleCloseDelete }>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={ deleteIssue }>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
-
-
 
 IssuesList.propTypes = {
     labels: PropTypes.array,

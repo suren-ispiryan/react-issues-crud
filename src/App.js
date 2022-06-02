@@ -106,15 +106,15 @@ const App = () => {
                         name="search"
                         className="search-input"
                         placeholder="Search"
-                        onChange={(event) => handleSearch(event.target)}
+                        onChange={ (event) => handleSearch(event.target) }
                     />
-                    <button className="btn btn-primary" onClick={searchIssue}>
+                    <button className="btn btn-primary" onClick={ searchIssue }>
                         Search
                     </button>
-                    <button className="btn btn-primary mx-2" onClick={handleShow}>
+                    <button className="btn btn-primary mx-2" onClick={ handleShow }>
                         Create label
                     </button>
-                    <button className="btn btn-primary mx-2" onClick={handleShowIssue}>
+                    <button className="btn btn-primary mx-2" onClick={ handleShowIssue }>
                         Create issue
                     </button>
                 </div>

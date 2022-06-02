@@ -53,8 +53,7 @@ const IssueModal = (props) => {
         setFormErrors(errors)
         setIsSubmit(false);
     }
-
-
+    
     return (
         <Modal show={showIssue} onHide={handleCloseIssue}>
             <Modal.Header closeButton>

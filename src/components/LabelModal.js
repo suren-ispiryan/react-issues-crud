@@ -33,22 +33,22 @@ const LabelModal = (props) => {
     }
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={ handleClose }>
             <Modal.Header closeButton>
                 <Modal.Title>Create label</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
                 <form>
-                    <input type="text" name="name" className="form-control my-2" placeholder="name" onChange={handleChange} />
-                    <input type="color" name="color" className="form-control my-2" placeholder="color" onChange={handleChange} />
+                    <input type="text" name="name" className="form-control my-2" placeholder="name" onChange={ handleChange } />
+                    <input type="color" name="color" className="form-control my-2" placeholder="color" onChange={ handleChange } />
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={ handleClose }>
                     Close
                 </Button>
-                <Button variant="primary" onClick={createLabel}>
+                <Button variant="primary" onClick={ createLabel }>
                      Create
                 </Button>
             </Modal.Footer>
